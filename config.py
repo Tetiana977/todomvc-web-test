@@ -3,15 +3,17 @@ import pydantic
 
 
 EnvContext = Literal['local', 'stage', 'prod']
+BrowserName = Literal['chrome', 'firefox']
 
 
-class Options(pydantic.BaseSettings):
+class Settings(pydantic.BaseSettings):
 
     context: EnvContext = 'local'
 
-    browser_name: str = "chrome"
+    browser_name: BrowserName = "chrome"
     browser_quit_after_each_test: bool = False
+    headless: bool = False
 
 
-_context = Options().context
-options = Options(_env_file=f'config.{_context}.env')
+_context = Settings().context
+settings = Settings(_env_file=f'config.{_context}.env')
