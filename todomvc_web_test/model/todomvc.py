@@ -16,6 +16,7 @@ class TodoMvc:
 
         browser.open('https://todomvc4tasj.herokuapp.com')
         browser.should(have.js_returned(True, download_page))
+
         return self
 
     def add(self, *names: str):

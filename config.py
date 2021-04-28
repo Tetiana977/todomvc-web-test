@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 import pydantic
 
 
@@ -13,7 +13,12 @@ class Settings(pydantic.BaseSettings):
     browser_name: BrowserName = "chrome"
     browser_quit_after_each_test: bool = False
     headless: bool = False
+    browser_window_maximize: bool = False
+    browser_window_width = 1440
+    browser_window_height: int = 900
+    remote_url: Optional[pydantic.AnyHttpUrl] = None
+    remote_enableVNC: bool = True
+    remote_screenResolution: str = '1980 * 600 * 24'
 
 
-_context = Settings().context
-settings = Settings(_env_file=f'config.{_context}.env')
+settings = Settings(_env_file=f'config.{Settings().context}.env')
